@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # This code returns the inverse of a large matrix with caching functionality.
 # Caching is implemented without the makeCachematrix fucntion.
 # So if the input matrix matches the last matrix, with previous inverted matrix stored in a cache is returned. 
@@ -39,3 +40,37 @@ if (identical(x,y))
 # > system.time(cacheSolve(x))
 # user  system elapsed 
 # 0       0       0 
+=======
+## Put comments here that give an overall description of what your
+## functions do
+
+## Creates a special matrix that can cache its inverse
+
+makeCacheMatrix <- function(x = matrix()) {
+  invrs<-NULL
+  set <- function(y) {
+    x<<-y
+    invrs <<- NULL
+  }
+  get <- function() x
+  setInvrs <- function(inverse) invrs <<- inverse
+  getInvrs <- function() invrs
+  list(set = set, get=get, setInvrs = setInvrs, getInvrs = getInvrs)
+}
+
+
+## Calculates the inverse of the matrix from the function machCacheMatrix 
+
+cacheSolve <- function(x, ...) {
+        ## Return a matrix that is the inverse of 'x'
+  invrs<- x$getInvrs()
+  if(!is.null(invrs)){
+    message("getting cached data")
+    return(invrs)
+  }
+  data <- x$get()
+  invrs <- solve(data,...)
+  x$setInvrs(invrs)
+  invrs
+}
+>>>>>>> 019b2117d4bffe912f57f0fa86db0393efa280d7
